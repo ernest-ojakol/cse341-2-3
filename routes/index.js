@@ -7,4 +7,5 @@ router.get('/', (req, res) => {
 });
 
 router.use('/temples', require('./temples'));
+router.use('/churchstats', require('./churchstats'));
 module.exports = router;
