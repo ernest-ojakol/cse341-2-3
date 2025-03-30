@@ -43,7 +43,7 @@ router.put(
         check('id').isMongoId().withMessage('Invalid temple ID format (must be a 24-character hex string)'),
         check('temple_name').optional().isString().withMessage('Temple name must be a string')
             .isLength({ min: 3 }).withMessage('Temple name must be at least 3 characters'),
-        check('city').notEmpty("City is required").withMessage().isString().withMessage('City must be a string'),
+        check('city').notEmpty().withMessage("City is required").isString().withMessage('City must be a string'),
         check('date_of_announcement').optional().isString().withMessage('Valid announcement date (YYYY-MM-DD) is required if provided'),
         check('date_of_dedication').optional().isString().withMessage('Valid dedication date (YYYY-MM-DD) is required if provided'),
         check('size').optional().isString().withMessage('Size must be a provided')
