@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { check, validationResult } = require('express-validator');
 const templeController = require('../controllers/temples');
+const {isAuthenticated} = require("../middleware/authenticate")
 
 const validate = (req, res, next) => {
     const errors = validationResult(req);
@@ -21,7 +22,7 @@ router.get(
 );
 
 router.post(
-    '/',
+    '/',isAuthenticated,
     [
         check('temple_name').notEmpty().withMessage('Temple name is required')
             .isString().withMessage('Temple name must be a string')
@@ -38,7 +39,7 @@ router.post(
 
 
 router.put(
-    '/:id',
+    '/:id',isAuthenticated,
     [
         check('id').isMongoId().withMessage('Invalid temple ID format (must be a 24-character hex string)'),
         check('temple_name').optional().isString().withMessage('Temple name must be a string')
@@ -53,7 +54,7 @@ router.put(
 );
 
 router.delete(
-    '/:id',
+    '/:id',isAuthenticated,
     [
         check('id').isMongoId().withMessage('Invalid temple ID format (must be a 24-character hex string)')
     ],

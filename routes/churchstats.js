@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { body, param, validationResult } = require('express-validator');
 const churchstatsController = require('../controllers/churchstats');
+const {isAuthenticated}=require("../middleware/authenticate")
 
 const validate = (req, res, next) => {
   const errors = validationResult(req);
@@ -36,7 +37,7 @@ router.get(
 );
 
 router.post(
-  '/',
+  '/',isAuthenticated,
   [
     body('country')
       .trim()
@@ -72,7 +73,7 @@ router.post(
 );
 
 router.put(
-  '/:id',
+  '/:id',isAuthenticated,
   [
     param('id')
       .isMongoId()
@@ -118,7 +119,7 @@ router.put(
 );
 
 router.delete(
-  '/:id',
+  '/:id',isAuthenticated,
   [
     param('id')
       .isMongoId()
